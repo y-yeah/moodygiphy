@@ -1,28 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Our Vue.js App"/>
-  </div>
+  <v-app>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Emotify</span>
+        <span class="font-weight-light">Moody Giphy</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <Upload :photo="photo"/>
+    </v-toolbar>
+    <v-container>
+      <v-img v-if="photo.length > 0" :src="photo[0]" width="40%"/>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Upload from "./components/Upload";
 
 export default {
-  name: 'app',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Upload
+  },
+  data: () => ({
+    photo: []
+  })
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
