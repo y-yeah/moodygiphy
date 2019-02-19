@@ -3,11 +3,14 @@
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>Emotify</span>
-        <span class="font-weight-light"> Moody Giphy</span>
+        <span class="font-weight-light">Moody Giphy</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <Upload/>
+      <Upload :photo="photo"/>
     </v-toolbar>
+    <v-container>
+      <v-img v-if="photo.length > 0" :src="photo[0]" width="40%"/>
+    </v-container>
   </v-app>
 </template>
 
@@ -19,10 +22,8 @@ export default {
   components: {
     Upload
   },
-  data() {
-    return {
-      //
-    };
-  }
+  data: () => ({
+    photo: []
+  })
 };
 </script>
