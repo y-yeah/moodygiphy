@@ -13,6 +13,8 @@
     "prod": "yarn build && nodemon server/index.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "heroku": "^7.21.0",
     "morgan": "^1.9.1",
