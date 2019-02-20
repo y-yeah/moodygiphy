@@ -9,7 +9,13 @@
       <Upload :photo="photo"/>
     </v-toolbar>
     <v-container>
-      <v-img v-if="photo.length > 0" :src="photo[0]" width="40%"/>
+      <v-container v-if="photo.length > 0">
+        <v-container v-for="photo in photo" v-bind:key="photo" class="pictureContainer">
+          <v-img :src="photo" class="picture"/>
+          <div class="json">JSON result will be here</div>
+          <div class="giphy">GIPHY will be here</div>
+        </v-container>
+      </v-container>
     </v-container>
   </v-app>
 </template>
@@ -27,3 +33,27 @@ export default {
   })
 };
 </script>
+
+<style scoped>
+.pictureContainer {
+  clear: left;
+}
+.picture {
+  float: left;
+  width: 40%;
+}
+.json {
+  float: left;
+  border: solid 2px;
+  width: 30%;
+  height: 100%;
+  padding: 80px;
+}
+.giphy {
+  float: left;
+  border: solid 2px;
+  width: 30%;
+  height: 100%;
+  padding: 80px;
+}
+</style>
