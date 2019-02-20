@@ -11,11 +11,17 @@
     <v-container>
       <div v-if="photo.length > 0" row wrap>
         <v-layout v-for="photo in photo" v-bind:key="photo.id">
+          <v-flex class="omikujiContainer" xs1>
+            <div>おみくじ</div>
+          </v-flex>
           <v-flex class="pictureContainer" xs4>
             <v-img :src="photo.photo"/>
           </v-flex>
           <v-flex class="emotionContainer" xs4>
             <div>{{photo.emotion}}</div>
+          </v-flex>
+          <v-flex class="responseContainer" xs4>
+            <div>{{photo.response}}</div>
           </v-flex>
           <v-flex class="giphyContainer" xs4>
             <div>{{photo.giphy}}</div>
@@ -42,9 +48,20 @@ export default {
 </script>
 
 <style scoped>
+.omikujiContainer {
+  padding: 15px;
+  border: solid 2px;
+  font-size: 40px;
+  text-align: center;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+.pictureContainer,
 .emotionContainer,
+.responseContainer,
 .giphyContainer {
   border: solid 2px;
   padding: 3%;
 }
+
 </style>
