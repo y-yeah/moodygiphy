@@ -5,14 +5,18 @@
   "description": "\"API mashup\"",
   "author": "Yuma Sumi <rbly.776324.yuma66krayt@gmail.com>",
   "scripts": {
+    "start": "node server/index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "heroku-postbuild": "yarn build",
+    "prod": "yarn build && nodemon server/index.js"
   },
   "dependencies": {
     "express": "^4.16.4",
     "heroku": "^7.21.0",
     "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
     "vue": "^2.6.6",
     "vuetify": "^1.3.0"
   },

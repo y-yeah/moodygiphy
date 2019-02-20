@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const app = express();
 app.use(morgan("combined"));
 
-// app.use(express.static("dist"));
+app.use(express.static("dist"));
 
 app.get("/", async (req, res) => {
   res.send("hello world");
