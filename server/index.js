@@ -25,7 +25,8 @@ app.get("/", async (req, res) => {
   res.send("hello world");
 });
 
-app.post("/upload", express.json(), async (req, res) => {
+app.post("/api/upload", async (req, res) => {
+
   const { photo } = req.body;
   const binaryImage = Buffer.from(photo.split(",")[1], "base64");
 
@@ -43,12 +44,16 @@ app.post("/upload", express.json(), async (req, res) => {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/octet-stream",
+
+      // "Content-Type": "application/json",
       "Ocp-Apim-Subscription-Key": FACE_KEY
     },
-    // data: binaryImage
-    data: {
-      url: ""
-    }
+    data: binaryImage
+    // data: {
+    //   url:
+    //     "https://upload.wikimedia.org/wikipedia/commons/6/6d/Shinz%C5%8D_Abe_Official.jpg"
+    // }
+
   })
     .then(response => {
       response.data.length !== 0
