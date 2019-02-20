@@ -6,16 +6,22 @@
         <span class="font-weight-light">Moody Giphy</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <Upload :photo="photo"/>
+      <Upload :photo="photo" :render="render"/>
     </v-toolbar>
     <v-container>
-      <v-container v-if="photo.length > 0">
-        <v-container v-for="photo in photo" v-bind:key="photo" class="pictureContainer">
-          <v-img :src="photo" class="picture"/>
-          <div class="json">JSON result will be here</div>
-          <div class="giphy">GIPHY will be here</div>
-        </v-container>
-      </v-container>
+      <div v-if="photo.length > 0" row wrap>
+        <v-layout v-for="photo in photo" v-bind:key="photo.id">
+          <v-flex class="pictureContainer" xs4>
+            <v-img :src="photo.photo"/>
+          </v-flex>
+          <v-flex class="emotionContainer" xs4>
+            <div>{{photo.emotion}}</div>
+          </v-flex>
+          <v-flex class="giphyContainer" xs4>
+            <div>{{photo.giphy}}</div>
+          </v-flex>
+        </v-layout>
+      </div>
     </v-container>
   </v-app>
 </template>
@@ -29,31 +35,16 @@ export default {
     Upload
   },
   data: () => ({
-    photo: []
+    photo: [],
+    render: []
   })
 };
 </script>
 
 <style scoped>
-.pictureContainer {
-  clear: left;
-}
-.picture {
-  float: left;
-  width: 40%;
-}
-.json {
-  float: left;
+.emotionContainer,
+.giphyContainer {
   border: solid 2px;
-  width: 30%;
-  height: 100%;
-  padding: 80px;
-}
-.giphy {
-  float: left;
-  border: solid 2px;
-  width: 30%;
-  height: 100%;
-  padding: 80px;
+  padding: 3%;
 }
 </style>
