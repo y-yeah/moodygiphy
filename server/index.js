@@ -10,13 +10,24 @@ app.use(morgan("combined"));
 
 app.use(express.static("dist"));
 
+app.use(
+  express.json({
+    limit: "100mb"
+  })
+);
+app.use(
+  express.urlencoded({
+    limit: "100mb"
+  })
+);
+
 app.get("/", async (req, res) => {
   res.send("hello world");
 });
 
-app.post("/upload", async (req, res) => {
-  // const { photo } = req.body;
-  // const binaryImage = Buffer.from(photo.split(",")[1], "base64");
+app.post("/upload", express.json(), async (req, res) => {
+  const { photo } = req.body;
+  const binaryImage = Buffer.from(photo.split(",")[1], "base64");
 
   axios({
     method: "post",
@@ -31,14 +42,12 @@ app.post("/upload", async (req, res) => {
     },
     headers: {
       "Access-Control-Allow-Origin": "*",
-      // "Content-Type": "application/octet-stream",
-      "Content-Type": "application/json",
+      "Content-Type": "application/octet-stream",
       "Ocp-Apim-Subscription-Key": FACE_KEY
     },
     // data: binaryImage
     data: {
-      'url':
-        "https://upload.wikimedia.org/wikipedia/commons/6/6d/Shinz%C5%8D_Abe_Official.jpg"
+      url: ""
     }
   })
     .then(response => {
