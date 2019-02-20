@@ -12,11 +12,13 @@ app.use(express.static("dist"));
 
 app.use(
   express.json({
+    extended: true,
     limit: "100mb"
   })
 );
 app.use(
   express.urlencoded({
+    extended: true,
     limit: "100mb"
   })
 );
