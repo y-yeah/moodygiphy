@@ -25,8 +25,7 @@ app.get("/", async (req, res) => {
   res.send("hello world");
 });
 
-app.post("/api/upload", async (req, res) => {
-
+app.post("/api/upload", express.json(), async (req, res) => {
   const { photo } = req.body;
   const binaryImage = Buffer.from(photo.split(",")[1], "base64");
 
@@ -53,12 +52,11 @@ app.post("/api/upload", async (req, res) => {
     //   url:
     //     "https://upload.wikimedia.org/wikipedia/commons/6/6d/Shinz%C5%8D_Abe_Official.jpg"
     // }
-
   })
     .then(response => {
       response.data.length !== 0
         ? res.json(response.data[0].faceAttributes.emotion)
-        : res.sendStatus(500);
+        : res.status(200).send("Are you sure your subject is a human?");
     })
     .catch(err => {
       return res.status(500).send(err);
