@@ -11,7 +11,7 @@
     "lint": "vue-cli-service lint",
     "heroku-postbuild": "yarn build",
     "prod": "yarn build && nodemon server/index.js",
-    "local-test": "npm-run-all --parallel prod start"
+    "local-test": "npm-run-all --parallel prod serve"
   },
   "dependencies": {
     "axios": "^0.18.0",
