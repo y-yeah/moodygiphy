@@ -10,7 +10,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "heroku-postbuild": "yarn build",
-    "prod": "yarn build && nodemon server/index.js"
+    "prod": "yarn build && nodemon server/index.js",
+    "local-test": "npm-run-all --parallel prod start"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -29,6 +30,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "npm-run-all": "^4.1.5",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli": "^2.9.6",
