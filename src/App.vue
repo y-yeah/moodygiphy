@@ -38,7 +38,14 @@
           </v-flex>
           <v-flex class="emotionContainer" xs4>
             <div>{{photo.emotion}}</div>
-            <Chart v-if="emotion.length > index" :emotion="emotion" :index="index"/>
+            <Chart
+              v-if="emotion.length > index"
+              :emotion="emotion"
+              :index="index"
+              class="chart"
+              style="width: 200px; margin-left:auto; margin-right: auto;"
+            />
+            <!-- </div> -->
           </v-flex>
           <v-flex class="responseContainer" xs4>
             <div>{{photo.response}}</div>
