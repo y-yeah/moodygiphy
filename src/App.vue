@@ -6,11 +6,11 @@
         <span class="font-weight-light">Moody Giphy</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <Upload :photo="photo" :render="render"/>
+      <Upload :photo="photo" :render="render" :emotion="emotion"/>
     </v-toolbar>
     <v-container>
       <div v-if="photo.length > 0" row wrap>
-        <v-layout v-for="photo in photo" v-bind:key="photo.id" class="omikuji">
+        <v-layout v-for="(photo, index) in photo" v-bind:key="photo.id" class="omikuji">
           <v-flex class="omikujiContainer" xs1>
             <div>おみくじ</div>
           </v-flex>
@@ -19,12 +19,13 @@
           </v-flex>
           <v-flex class="emotionContainer" xs4>
             <div>{{photo.emotion}}</div>
+            <Chart v-if="emotion.length > index" :emotion="emotion" :index="index"/>
           </v-flex>
           <v-flex class="responseContainer" xs4>
             <div>{{photo.response}}</div>
           </v-flex>
           <v-flex class="giphyContainer" xs4>
-              <v-img :src="photo.giphy" />
+            <v-img :src="photo.giphy"/>
           </v-flex>
         </v-layout>
       </div>
@@ -34,14 +35,17 @@
 
 <script>
 import Upload from "./components/Upload";
+import Chart from "./components/Chart";
 
 export default {
   name: "App",
   components: {
-    Upload
+    Upload,
+    Chart
   },
   data: () => ({
     photo: [],
+    emotion: [],
     render: []
   })
 };
