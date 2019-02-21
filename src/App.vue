@@ -10,7 +10,7 @@
     </v-toolbar>
     <v-container>
       <div v-if="photo.length > 0" row wrap>
-        <v-layout v-for="photo in photo" v-bind:key="photo.id">
+        <v-layout v-for="photo in photo" v-bind:key="photo.id" class="omikuji">
           <v-flex class="omikujiContainer" xs1>
             <div>おみくじ</div>
           </v-flex>
@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .omikujiContainer {
   padding: 15px;
-  border: solid 2px;
+  border: solid 2px black;
   font-size: 40px;
   text-align: center;
   writing-mode: vertical-rl;
@@ -60,8 +60,17 @@ export default {
 .emotionContainer,
 .responseContainer,
 .giphyContainer {
-  border: solid 2px;
+  border: solid 1px black;
   padding: 3%;
 }
-
+.responseContainer,
+.emotionContainer {
+  font-size: 20px;
+}
+.omikuji {
+  margin-bottom: 10px;
+  background-color: #dc143c;
+  color: white;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
 </style>
