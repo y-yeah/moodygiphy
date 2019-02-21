@@ -30,7 +30,13 @@
           <v-flex class="emotionContainer" xs4>
             <!-- <div class="inside"> -->
             <div>{{photo.emotion}}</div>
-            <Chart v-if="emotion.length > index" :emotion="emotion" :index="index" class="chart"/>
+            <Chart
+              v-if="emotion.length > index"
+              :emotion="emotion"
+              :index="index"
+              class="chart"
+              style="width: 200px; margin-left:auto; margin-right: auto;"
+            />
             <!-- </div> -->
           </v-flex>
           <!-- </div> -->
@@ -79,14 +85,14 @@ export default {
 }
 .pictureContainer,
 .emotionContainer,
-  .responseContainer,
-  .giphyContainer {
+.responseContainer,
+.giphyContainer {
   /* height: 100%; */
   margin: 10px;
 }
 .emotionContainer {
   border-left: dashed 1px black;
-  border-right: dashed 1px black;  
+  border-right: dashed 1px black;
   padding: 10px;
 }
 .responseContainer,
