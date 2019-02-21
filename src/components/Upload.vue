@@ -38,8 +38,6 @@ export default {
             }
           })
             .then(res => {
-              console.log("=======>", res.data);
-              //this.getEmotion(res.data);
               this.photo[photo.length - 1].emotion = this.getResponcePhrase(
                 this.getEmotion(res.data)
               );
@@ -58,8 +56,7 @@ export default {
                     }
                   })
                   .then(res => {
-                    console.log(res);
-                    photo[photo.length - 1].response = res.data;
+                    this.insultFilter(res.data);
                     render.push(photo.length);
                   })
                   .catch(err => {
@@ -90,6 +87,15 @@ export default {
     },
     upload() {
       this.$refs.input.click();
+    },
+    insultFilter(phrase){
+      const curse = ["Bitch", "Shit", "Penis", "Cum", "Arse", "Ass", "Piss", "Fuck", "Sperm", "Semen", "Anus", "Cunt", "Anal", "Nigger", "Cock", "Pussy", "Whore", "Tit", "Twat"];
+      let variable = phrase
+      
+      for (let i = 0; i <curse.length; i++){
+     variable = variable.replace(curse[i], "$*%@!")
+    }
+     this.photo[this.photo.length - 1].response = variable;
     },
     getGiphy(keyword) {
       axios({
