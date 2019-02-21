@@ -5,13 +5,16 @@
     background: linear-gradient(to top, #b7282e, #1f3134, #1f3134);
   "
   >
-    <v-toolbar app style="
+    <v-toolbar
+      app
+      style="
       background-color: #1f3134;
       color: #fff;
-    ">
+      height: 70px;
+    "
+    >
       <v-toolbar-title class="headline text-uppercase">
-        <img src="../img/omikuji_icon.png" height="50px">
-        <span>Omykuji</span>
+        <img src="../img/omikuji_header.png" height="50px">
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
@@ -80,6 +83,10 @@ export default {
 </script>
 
 <style scoped>
+.headline {
+  padding-top: 20px;
+  /* padding-bottom: 20px; */
+}
 .omikujiContainer {
   padding: 50px;
   font-size: 40px;
@@ -97,6 +104,7 @@ export default {
 .emotionContainer {
   border-left: dashed 1px black;
   border-right: dashed 1px black;
+  padding-right: 5px;
 }
 .responseContainer,
 .emotionContainer {
