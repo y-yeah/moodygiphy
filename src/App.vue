@@ -1,14 +1,29 @@
 <template>
-  <v-app>
-    <v-toolbar app>
+  <v-app
+    style="
+    background: #3A1C71;
+    background: linear-gradient(to top, #b7282e, #1f3134, #1f3134);
+  "
+  >
+    <v-toolbar app style="
+      background-color: #1f3134;
+      color: #fff;
+    ">
       <v-toolbar-title class="headline text-uppercase">
+        <img src="../img/omikuji_icon.png" height="50px">
         <span>Omykuji</span>
-        <span class="font-weight-light">Mood stabilizer</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <Upload :photo="photo" :render="render" :emotion="emotion"/>
     </v-toolbar>
     <v-container>
+      <div>
+        <h2 class="introTitle">INTRO</h2>
+        <p class="intro">
+          <strong>Omykuji&copy;</strong> judges user’s emotional state from a picture, stabilizing their mood by providing text and gifs.
+          <br>Please upload a picture of you with your face.
+        </p>
+        <Upload :photo="photo" :render="render" :emotion="emotion" :luck="luck"/>
+      </div>
       <div v-if="photo.length > 0" row wrap>
         <v-layout
           v-for="(photo, index) in photo"
@@ -16,40 +31,29 @@
           class="omikuji"
           align-center
         >
-          <!-- <div class="wrapper"> -->
           <v-flex class="omikujiContainer" xs1>
-            <div class="inside">おみくじ</div>
+            <div class="title">{{luck[index]}}</div>
           </v-flex>
-          <!-- </div> -->
-          <!-- <div class="wrapper"> -->
           <v-flex class="pictureContainer" xs4>
-            <v-img :src="photo.photo" id="insidePic"/>
+            <v-img :src="photo.photo"/>
           </v-flex>
-          <!-- </div> -->
-          <!-- <div class="wrapper"> -->
           <v-flex class="emotionContainer" xs4>
-            <!-- <div class="inside"> -->
             <div>{{photo.emotion}}</div>
             <Chart
               v-if="emotion.length > index"
               :emotion="emotion"
               :index="index"
               class="chart"
-              style="width: 200px; margin-left:auto; margin-right: auto;"
+              style="width: 200px; height: 200px; margin-left:auto; margin-right: auto;"
             />
             <!-- </div> -->
           </v-flex>
-          <!-- </div> -->
-          <!-- <div class="wrapper"> -->
           <v-flex class="responseContainer" xs4>
-            <div class="inside">{{photo.response}}</div>
+            <div>{{photo.response}}</div>
           </v-flex>
-          <!-- </div> -->
-          <!-- <div class="wrapper"> -->
           <v-flex class="giphyContainer" xs4>
-            <v-img :src="photo.giphy" class="inside"/>
+            <v-img :src="photo.giphy"/>
           </v-flex>
-          <!-- </div> -->
         </v-layout>
       </div>
     </v-container>
@@ -69,6 +73,7 @@ export default {
   data: () => ({
     photo: [],
     emotion: [],
+    luck: [],
     render: []
   })
 };
@@ -76,10 +81,8 @@ export default {
 
 <style scoped>
 .omikujiContainer {
-  padding: 15px;
-  /* border: solid 2px black; */
+  padding: 50px;
   font-size: 40px;
-  text-align: center;
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
@@ -87,31 +90,40 @@ export default {
 .emotionContainer,
 .responseContainer,
 .giphyContainer {
-  /* height: 100%; */
   margin: 10px;
+  font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman",
+    serif;
 }
 .emotionContainer {
   border-left: dashed 1px black;
   border-right: dashed 1px black;
-  padding: 10px;
 }
 .responseContainer,
 .emotionContainer {
   font-size: 20px;
+  text-align: left;
+  padding-left: 10px;
 }
 .omikuji {
   margin-bottom: 10px;
-  background-image: url("../img/paper.png");
+  background-image: url("../img/paper3.png");
   background-repeat: repeat;
-  /* background-color: #dc143c; */
   color: white;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "YuMincho", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   padding: 10px;
+  border: solid 5px black;
 }
-.chart {
-  /* background-color: #dc143c; */
+.introTitle,
+.intro {
+  color: white;
 }
-/* .wrapper {
-  border-right: dashed 1px black;
-} */
+.intro {
+  font-size: 20px;
+  text-align: left;
+}
+.title {
+  font-family: "YuMincho" !important;
+  font-weight: bold;
+  font-size: 50px !important;
+}
 </style>
