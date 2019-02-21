@@ -114,12 +114,12 @@ app.get("/api/slapbot", (req, res) => {
         "X-RapidAPI-Key": RAKUTEN_KEY
       },
       params: {
-        q: q,
-        allowedSeverity: "pg"
+        //q: q,
+        //allowedSeverity: "pg"
       }
     })
     .then(response => {
-      res.json(response.description);
+      res.json(response.data[0].description);
     })
     .catch(err => {
       return res.status(500).send(err);
