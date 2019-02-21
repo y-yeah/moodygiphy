@@ -41,7 +41,6 @@ export default {
               this.getEmotion(res.data);
               this.photo[photo.length - 1].emotion = this.getEmotion(res.data);
               photo[photo.length - 1].response = "Response goes here";
-              photo[photo.length - 1].giphy = "GIPHY";
               return photo[photo.length - 1].emotion;
             })
             .then(emotion => {

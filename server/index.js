@@ -85,20 +85,20 @@ app.get("/api/insult", (req, res) => {
 });
 
 app.get("/api/giphy", (req, res) => {
-  const { q } = req.query;
+  const { tag } = req.query;
   axios
-    .get("https://giphy.p.rapidapi.com/v1/gifs/search", {
+    .get("https://giphy.p.rapidapi.com/v1/gifs/random", {
       headers: {
         "X-RapidAPI-Key": RAKUTEN_KEY
       },
       params: {
-        q: q,
+        tag: tag,
         api_key: "dc6zaTOxFJmzC"
       }
     })
     .then(response => {
-      response.data.data.length !== 0
-        ? res.json(response.data.data[0].images.fixed_height_still)
+      response.data.data !== undefined
+        ? res.json(response.data.data.fixed_height_downsampled_url)
         : res.send("Not found");
     })
     .catch(err => {
