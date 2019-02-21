@@ -12,7 +12,7 @@ export default {
   name: "upload",
   props: ["photo", "render"],
   methods: {
-    change: function(e) {
+    change(e) {
       const reader = new FileReader();
       const photo = this.photo;
       let render = this.render;
@@ -37,11 +37,9 @@ export default {
           }
         })
         .then(res => {
-          this.getEmotion(res.data);
           this.photo[photo.length - 1].emotion = 
           this.getEmotion(res.data);
           photo[photo.length - 1].response = "Response goes here";
-          photo[photo.length - 1].giphy = "GIPHY";
           render.push(photo.length);
         })
         .catch(err => {
@@ -49,12 +47,29 @@ export default {
         });
       });
     },
-    upload: function() {
+    upload() {
       this.$refs.input.click();
     },
-    getEmotion: (emotion) => {
+    getGiphy(keyword) {
+      axios({
+        method: "get",
+        url: "/api/giphy",
+        crossorigin: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+          },
+        params: {
+          q: keyword
+        }
+      }).then(res => {
+      this.photo[this.photo.length - 1].giphy = res.data;
+      this.render.push(this.photo.length)
+      })
+    },
+    getEmotion(emotion) {
       let responsePhrase = ""
       let array = [];
+
 
       if (typeof emotion === "string"){
         console.log("edge case")
@@ -67,11 +82,14 @@ export default {
       if (array[0] > array[1] && array[0] > array[2]) {
           responsePhrase="You're looking a little too happy there. Let me fix that!"
           //  call insult API
+          this.getGiphy("sad");
         } else if (array[1] > array[0] && array[1] > array[2]) {
           //  call compliment API;
+          this.getGiphy("funny cats");
           responsePhrase="You look like you could use some cheering up."
         } else {
           responsePhrase="Emotion neutralized."
+          this.getGiphy("neutral");
          // manipulate response container 
       }
       return responsePhrase;
