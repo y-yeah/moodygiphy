@@ -1,7 +1,7 @@
 <template>
   <div id="upload">
     <input type="file" ref="input" @change="(e) => change(e)" class="input">
-    <v-btn flat @click="upload">Upload</v-btn>
+    <v-btn flat @click="upload" style="color: #FFF; font-weight: bold; font-size: large;">Upload</v-btn>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default {
   name: "upload",
-  props: ["photo", "render", "emotion"],
+  props: ["photo", "render", "emotion", "luck"],
   methods: {
     change(e) {
       const reader = new FileReader();
@@ -40,6 +40,7 @@ export default {
             .then(res => {
               console.log("EMOTION", res.data);
               this.emotion.push(res.data);
+              this.luck.push(this.randomJudge());
               this.photo[photo.length - 1].emotion = this.getResponcePhrase(
                 this.getEmotion(res.data)
               );
@@ -184,6 +185,10 @@ export default {
           break;
       }
       return responsePhrase;
+    },
+    randomJudge: () => {
+      const options = ["大吉", "中吉", "小吉", "凶", "大凶"];
+      return options[Math.floor(Math.random() * 5)];
     }
   }
 };
@@ -195,7 +200,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
   margin-top: 60px;
 }
 .input {
