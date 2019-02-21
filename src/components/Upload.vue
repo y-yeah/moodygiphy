@@ -24,25 +24,6 @@ export default {
           console.log(photo);
           resolve(photo);
         };
-<<<<<<< HEAD
-      }).then((photo) => {
-        axios({
-          method: "post",
-          url: "/api/upload",
-          crossorigin: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          },
-          data: {
-            photo: photo[photo.length - 1].photo
-          }
-        })
-        .then(res => {
-          this.photo[photo.length - 1].emotion = 
-          this.getEmotion(res.data);
-          photo[photo.length - 1].response = "Response goes here";
-          render.push(photo.length);
-=======
       })
         .then(photo => {
           axios({
@@ -85,7 +66,6 @@ export default {
                   });
               }
             });
->>>>>>> b1122a1252e474ffad4cedb7eb5c96eefcf0096e
         })
         .catch(err => {
           console.error(err);
@@ -94,7 +74,6 @@ export default {
     upload() {
       this.$refs.input.click();
     },
-<<<<<<< HEAD
     getGiphy(keyword) {
       axios({
         method: "get",
@@ -118,14 +97,6 @@ export default {
 
       if (typeof emotion === "string"){
         console.log("edge case")
-=======
-    getEmotion: emotion => {
-      let responsePhrase = "";
-      let array = [];
-
-      if (typeof emotion === "string") {
-        console.log("edge case");
->>>>>>> b1122a1252e474ffad4cedb7eb5c96eefcf0096e
       }
 
       array.push(emotion.happiness);
@@ -139,7 +110,6 @@ export default {
       array.push(emotion.neutral);
 
       if (array[0] > array[1] && array[0] > array[2]) {
-<<<<<<< HEAD
           responsePhrase="You're looking a little too happy there. Let me fix that!"
           //  call insult API
           this.getGiphy("sad");
@@ -151,17 +121,6 @@ export default {
           responsePhrase="Emotion neutralized."
           this.getGiphy("neutral");
          // manipulate response container 
-=======
-        responsePhrase =
-          "You're looking a little too happy there. Let me fix that!";
-        //  call insult API
-      } else if (array[1] > array[0] && array[1] > array[2]) {
-        //  call compliment API;
-        responsePhrase = "You look like you could use some cheering up.";
-      } else {
-        responsePhrase = "Emotion neutralized.";
-        // manipulate response container
->>>>>>> b1122a1252e474ffad4cedb7eb5c96eefcf0096e
       }
       return responsePhrase;
     }
