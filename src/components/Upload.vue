@@ -59,7 +59,7 @@ export default {
           "Access-Control-Allow-Origin": "*"
           },
         params: {
-          q: keyword
+          tag: keyword
         }
       }).then(res => {
       this.photo[this.photo.length - 1].giphy = res.data;
