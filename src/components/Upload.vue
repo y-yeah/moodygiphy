@@ -12,7 +12,7 @@ export default {
   name: "upload",
   props: ["photo", "render"],
   methods: {
-    change: function(e) {
+    change(e) {
       const reader = new FileReader();
       const photo = this.photo;
       let render = this.render;
@@ -41,7 +41,6 @@ export default {
               this.getEmotion(res.data);
               this.photo[photo.length - 1].emotion = this.getEmotion(res.data);
               photo[photo.length - 1].response = "Response goes here";
-              photo[photo.length - 1].giphy = "GIPHY";
               return photo[photo.length - 1].emotion;
             })
             .then(emotion => {
@@ -71,15 +70,32 @@ export default {
           console.error(err);
         });
     },
-    upload: function() {
+    upload() {
       this.$refs.input.click();
     },
-    getEmotion: emotion => {
-      let responsePhrase = "";
+    getGiphy(keyword) {
+      axios({
+        method: "get",
+        url: "/api/giphy",
+        crossorigin: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+          },
+        params: {
+          tag: keyword
+        }
+      }).then(res => {
+      this.photo[this.photo.length - 1].giphy = res.data;
+      this.render.push(this.photo.length)
+      })
+    },
+    getEmotion(emotion) {
+      let responsePhrase = ""
       let array = [];
 
-      if (typeof emotion === "string") {
-        console.log("edge case");
+
+      if (typeof emotion === "string"){
+        console.log("edge case")
       }
 
       array.push(emotion.happiness);
@@ -93,15 +109,17 @@ export default {
       array.push(emotion.neutral);
 
       if (array[0] > array[1] && array[0] > array[2]) {
-        responsePhrase =
-          "You're looking a little too happy there. Let me fix that!";
-        //  call insult API
-      } else if (array[1] > array[0] && array[1] > array[2]) {
-        //  call compliment API;
-        responsePhrase = "You look like you could use some cheering up.";
-      } else {
-        responsePhrase = "Emotion neutralized.";
-        // manipulate response container
+          responsePhrase="You're looking a little too happy there. Let me fix that!"
+          //  call insult API
+          this.getGiphy("sad");
+        } else if (array[1] > array[0] && array[1] > array[2]) {
+          //  call compliment API;
+          this.getGiphy("funny cats");
+          responsePhrase="You look like you could use some cheering up."
+        } else {
+          responsePhrase="Emotion neutralized."
+          this.getGiphy("neutral");
+         // manipulate response container 
       }
       return responsePhrase;
     }

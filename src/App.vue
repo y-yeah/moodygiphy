@@ -24,7 +24,7 @@
             <div>{{photo.response}}</div>
           </v-flex>
           <v-flex class="giphyContainer" xs4>
-            <div>{{photo.giphy}}</div>
+              <v-img :src="photo.giphy" />
           </v-flex>
         </v-layout>
       </div>
