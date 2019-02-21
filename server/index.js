@@ -65,6 +65,25 @@ app.post("/api/upload", express.json(), async (req, res) => {
     });
 });
 
+app.get("/api/insult", (req, res) => {
+  axios
+    .get("https://lakerolmaker-insult-generator-v1.p.rapidapi.com/", {
+      headers: {
+        "X-RapidAPI-Key": RAKUTEN_KEY
+      },
+      params: {
+        mode: "random"
+      }
+    })
+    .then(response => {
+      res.json(response.data);
+      return;
+    })
+    .catch(err => {
+      return res.status(500).send(err);
+    });
+});
+
 app.get("/api/giphy", (req, res) => {
   const { q } = req.query;
   axios
@@ -79,8 +98,28 @@ app.get("/api/giphy", (req, res) => {
     })
     .then(response => {
       response.data.data.length !== 0
-        ? res.send(response.data.data[0].images.downsized.url)
+        ? res.json(response.data.data[0].images.fixed_height_still)
         : res.send("Not found");
+    })
+    .catch(err => {
+      return res.status(500).send(err);
+    });
+});
+
+app.get("/api/slapbot", (req, res) => {
+  const { q } = req.query;
+  axios
+    .get("https://markmscott-slapbot-v1.p.rapidapi.com/love", {
+      headers: {
+        "X-RapidAPI-Key": RAKUTEN_KEY
+      },
+      params: {
+        q: q,
+        allowedSeverity: "pg"
+      }
+    })
+    .then(response => {
+      res.json(response.description);
     })
     .catch(err => {
       return res.status(500).send(err);

@@ -17,13 +17,14 @@ export default {
       const photo = this.photo;
       let render = this.render;
 
-      new Promise((resolve) => {
+      new Promise(resolve => {
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = e => {
           photo.push({ photo: e.target.result });
           console.log(photo);
           resolve(photo);
         };
+<<<<<<< HEAD
       }).then((photo) => {
         axios({
           method: "post",
@@ -41,15 +42,59 @@ export default {
           this.getEmotion(res.data);
           photo[photo.length - 1].response = "Response goes here";
           render.push(photo.length);
+=======
+      })
+        .then(photo => {
+          axios({
+            method: "post",
+            url: "/api/upload",
+            crossorigin: true,
+            headers: {
+              "Access-Control-Allow-Origin": "*"
+            },
+            data: {
+              photo: photo[photo.length - 1].photo
+            }
+          })
+            .then(res => {
+              this.getEmotion(res.data);
+              this.photo[photo.length - 1].emotion = this.getEmotion(res.data);
+              photo[photo.length - 1].response = "Response goes here";
+              photo[photo.length - 1].giphy = "GIPHY";
+              return photo[photo.length - 1].emotion;
+            })
+            .then(emotion => {
+              if (
+                emotion ===
+                "You're looking a little too happy there. Let me fix that!"
+              ) {
+                axios
+                  .get("/api/insult", {
+                    crossorigin: true,
+                    headers: {
+                      "Access-Control-Allow-Origin": "*"
+                    }
+                  })
+                  .then(res => {
+                    console.log(res);
+                    photo[photo.length - 1].response = res.data;
+                    render.push(photo.length);
+                  })
+                  .catch(err => {
+                    console.error(err);
+                  });
+              }
+            });
+>>>>>>> b1122a1252e474ffad4cedb7eb5c96eefcf0096e
         })
         .catch(err => {
-          console.warn(err);
+          console.error(err);
         });
-      });
     },
     upload() {
       this.$refs.input.click();
     },
+<<<<<<< HEAD
     getGiphy(keyword) {
       axios({
         method: "get",
@@ -73,13 +118,28 @@ export default {
 
       if (typeof emotion === "string"){
         console.log("edge case")
+=======
+    getEmotion: emotion => {
+      let responsePhrase = "";
+      let array = [];
+
+      if (typeof emotion === "string") {
+        console.log("edge case");
+>>>>>>> b1122a1252e474ffad4cedb7eb5c96eefcf0096e
       }
 
       array.push(emotion.happiness);
-      array.push(emotion.sadness + emotion.anger + emotion.contempt + emotion.disgust + emotion.fear);
+      array.push(
+        emotion.sadness +
+          emotion.anger +
+          emotion.contempt +
+          emotion.disgust +
+          emotion.fear
+      );
       array.push(emotion.neutral);
 
       if (array[0] > array[1] && array[0] > array[2]) {
+<<<<<<< HEAD
           responsePhrase="You're looking a little too happy there. Let me fix that!"
           //  call insult API
           this.getGiphy("sad");
@@ -91,6 +151,17 @@ export default {
           responsePhrase="Emotion neutralized."
           this.getGiphy("neutral");
          // manipulate response container 
+=======
+        responsePhrase =
+          "You're looking a little too happy there. Let me fix that!";
+        //  call insult API
+      } else if (array[1] > array[0] && array[1] > array[2]) {
+        //  call compliment API;
+        responsePhrase = "You look like you could use some cheering up.";
+      } else {
+        responsePhrase = "Emotion neutralized.";
+        // manipulate response container
+>>>>>>> b1122a1252e474ffad4cedb7eb5c96eefcf0096e
       }
       return responsePhrase;
     }
