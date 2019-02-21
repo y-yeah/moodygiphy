@@ -65,6 +65,25 @@ app.post("/api/upload", express.json(), async (req, res) => {
     });
 });
 
+app.get("/api/insult", (req, res) => {
+  axios
+    .get("https://lakerolmaker-insult-generator-v1.p.rapidapi.com/", {
+      headers: {
+        "X-RapidAPI-Key": RAKUTEN_KEY
+      },
+      params: {
+        mode: "random"
+      }
+    })
+    .then(response => {
+      res.json(response.data);
+      return;
+    })
+    .catch(err => {
+      return res.status(500).send(err);
+    });
+});
+
 app.get("/api/giphy", (req, res) => {
   const { q } = req.query;
   axios
