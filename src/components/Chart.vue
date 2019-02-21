@@ -1,7 +1,7 @@
 <script>
-import { Radar } from "vue-chartjs";
+import { Pie } from "vue-chartjs";
 export default {
-  extends: Radar,
+  extends: Pie,
   props: ["emotion", "index"],
   mounted() {
     this.renderRaderChart();
@@ -22,14 +22,15 @@ export default {
             "sadness",
             "surprise"
           ],
+          type: "Pie",
           datasets: [
             {
               label: "Your emotion",
               backgroundColor: "rgba(0, 216, 255, .3)",
               borderColor: "rgba(0, 216, 255, .8)",
               borderWidth: 3,
-              pointBackgroundColor: "#000",
-              pointBorderColor: "#000",
+              pointBackgroundColor: "#fff",
+              pointBorderColor: "#fff",
               pointHoverBackgroundColor: "#fff",
               pointHoverBorderColor: "rgba(179,181,198,1)",
               data: [
