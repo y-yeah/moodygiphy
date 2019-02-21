@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default {
   name: "upload",
-  props: ["photo", "render"],
+  props: ["photo", "render", "emotion"],
   methods: {
     change(e) {
       const reader = new FileReader();
@@ -38,6 +38,8 @@ export default {
             }
           })
             .then(res => {
+              console.log("EMOTION", res.data);
+              this.emotion.push(res.data);
               this.photo[photo.length - 1].emotion = this.getResponcePhrase(
                 this.getEmotion(res.data)
               );
@@ -88,14 +90,34 @@ export default {
     upload() {
       this.$refs.input.click();
     },
-    insultFilter(phrase){
-      const curse = ["Bitch", "Shit", "Penis", "Cum", "Arse", "Ass", "Piss", "Fuck", "Sperm", "Semen", "Anus", "Cunt", "Anal", "Nigger", "Cock", "Pussy", "Whore", "Tit", "Twat"];
-      let variable = phrase
-      
-      for (let i = 0; i <curse.length; i++){
-     variable = variable.replace(curse[i], "$*%@!")
-    }
-     this.photo[this.photo.length - 1].response = variable;
+    insultFilter(phrase) {
+      const curse = [
+        "Bitch",
+        "Shit",
+        "Penis",
+        "Cum",
+        "Arse",
+        "Ass",
+        "Piss",
+        "Fuck",
+        "Sperm",
+        "Semen",
+        "Anus",
+        "Cunt",
+        "Anal",
+        "Nigger",
+        "Cock",
+        "Pussy",
+        "Whore",
+        "Tit",
+        "Twat"
+      ];
+      let variable = phrase;
+
+      for (let i = 0; i < curse.length; i++) {
+        variable = variable.replace(curse[i], "$*%@!");
+      }
+      this.photo[this.photo.length - 1].response = variable;
     },
     getGiphy(keyword) {
       axios({
