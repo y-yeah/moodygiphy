@@ -57,7 +57,7 @@ app.post("/api/upload", express.json(), async (req, res) => {
   })
     .then(response => {
       response.data.length !== 0
-        ? res.send(response.data[0].faceAttributes.emotion)
+        ? res.json(response.data[0].faceAttributes.emotion)
         : res.status(200).send("Are you sure your subject is a human?");
     })
     .catch(err => {
@@ -100,6 +100,26 @@ app.get("/api/giphy", (req, res) => {
       response.data.data.length !== 0
         ? res.json(response.data.data[0].images.fixed_height_still)
         : res.send("Not found");
+    })
+    .catch(err => {
+      return res.status(500).send(err);
+    });
+});
+
+app.get("/api/slapbot", (req, res) => {
+  const { q } = req.query;
+  axios
+    .get("https://markmscott-slapbot-v1.p.rapidapi.com/love", {
+      headers: {
+        "X-RapidAPI-Key": RAKUTEN_KEY
+      },
+      params: {
+        q: q,
+        allowedSeverity: "pg"
+      }
+    })
+    .then(response => {
+      res.json(response.description);
     })
     .catch(err => {
       return res.status(500).send(err);
