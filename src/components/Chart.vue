@@ -24,12 +24,12 @@ export default {
           ],
           datasets: [
             {
-              label: "Your Emotion",
+              label: "Your emotion",
               backgroundColor: "rgba(0, 216, 255, .3)",
               borderColor: "rgba(0, 216, 255, .8)",
-              borderWidth: 1,
-              pointBackgroundColor: "#fff",
-              pointBorderColor: "#fff",
+              borderWidth: 3,
+              pointBackgroundColor: "#000",
+              pointBorderColor: "#000",
               pointHoverBackgroundColor: "#fff",
               pointHoverBorderColor: "rgba(179,181,198,1)",
               data: [

@@ -19,7 +19,7 @@
           </v-flex>
           <v-flex class="emotionContainer" xs4>
             <div>{{photo.emotion}}</div>
-            <Chart v-if="emotion.length > index" :emotion="emotion" :index="index"/>
+            <Chart v-if="emotion.length > index" :emotion="emotion" :index="index" class="chart"/>
           </v-flex>
           <v-flex class="responseContainer" xs4>
             <div>{{photo.response}}</div>
@@ -76,5 +76,8 @@ export default {
   background-color: #dc143c;
   color: white;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+.chart {
+  background-color: white
 }
 </style>
