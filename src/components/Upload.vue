@@ -38,9 +38,10 @@ export default {
             }
           })
             .then(res => {
+              console.log("=======>",res.data)
               this.getEmotion(res.data);
               this.photo[photo.length - 1].emotion = this.getEmotion(res.data);
-              photo[photo.length - 1].response = "Response goes here";
+              photo[photo.length - 1].response = "No one can see your inner feelings.";
               return photo[photo.length - 1].emotion;
             })
             .then(emotion => {
@@ -93,11 +94,6 @@ export default {
       let responsePhrase = ""
       let array = [];
 
-
-      if (typeof emotion === "string"){
-        console.log("edge case")
-      }
-
       array.push(emotion.happiness);
       array.push(
         emotion.sadness +
@@ -116,15 +112,17 @@ export default {
           //  call compliment API;
           this.getGiphy("funny cats");
           responsePhrase="You look like you could use some cheering up."
-        } else {
+        } else if (array[2] > array[0] && array[2] > array[1]){
           responsePhrase="Emotion neutralized."
           this.getGiphy("neutral");
-         // manipulate response container 
-      }
+        } else {
+          this.getGiphy("robot");
+          responsePhrase="Are you sure you're human?"
+        }
       return responsePhrase;
     }
   }
-};
+}
 </script>
 
 <style>
