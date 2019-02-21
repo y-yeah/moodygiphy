@@ -38,17 +38,18 @@ export default {
             }
           })
             .then(res => {
+              console.log("EMOTION", res.data);
               this.emotion.push(res.data);
-              this.getEmotion(res.data);
-              this.photo[photo.length - 1].emotion = this.getEmotion(res.data);
-              photo[photo.length - 1].response = "Response goes here";
-              return photo[photo.length - 1].emotion;
+              this.photo[photo.length - 1].emotion = this.getResponcePhrase(
+                this.getEmotion(res.data)
+              );
+              photo[photo.length - 1].response =
+                "No one can see your inner feelings.";
+              return this.getEmotion(res.data);
             })
             .then(emotion => {
-              if (
-                emotion ===
-                "You're looking a little too happy there. Let me fix that!"
-              ) {
+              console.log(emotion);
+              if (emotion === "positive") {
                 axios
                   .get("/api/insult", {
                     crossorigin: true,
@@ -57,7 +58,22 @@ export default {
                     }
                   })
                   .then(res => {
-                    console.log(res);
+                    this.insultFilter(res.data);
+                    render.push(photo.length);
+                  })
+                  .catch(err => {
+                    console.error(err);
+                  });
+              } else if (emotion === "negative") {
+                axios
+                  .get("/api/slapbot", {
+                    crossorigin: true,
+                    headers: {
+                      "Access-Control-Allow-Origin": "*"
+                    }
+                  })
+                  .then(res => {
+                    console.log("negative emotion: ", res);
                     photo[photo.length - 1].response = res.data;
                     render.push(photo.length);
                   })
@@ -73,6 +89,35 @@ export default {
     },
     upload() {
       this.$refs.input.click();
+    },
+    insultFilter(phrase) {
+      const curse = [
+        "Bitch",
+        "Shit",
+        "Penis",
+        "Cum",
+        "Arse",
+        "Ass",
+        "Piss",
+        "Fuck",
+        "Sperm",
+        "Semen",
+        "Anus",
+        "Cunt",
+        "Anal",
+        "Nigger",
+        "Cock",
+        "Pussy",
+        "Whore",
+        "Tit",
+        "Twat"
+      ];
+      let variable = phrase;
+
+      for (let i = 0; i < curse.length; i++) {
+        variable = variable.replace(curse[i], "$*%@!");
+      }
+      this.photo[this.photo.length - 1].response = variable;
     },
     getGiphy(keyword) {
       axios({
@@ -92,35 +137,51 @@ export default {
     },
     getEmotion(emotion) {
       let responsePhrase = "";
-      let array = [];
+      let emoPosSum = 0;
+      let emoNegSum = 0;
+      let emoNeutSum = 0;
+      let emoState = "neutral";
 
-      if (typeof emotion === "string") {
-        console.log("edge case");
-      }
-
-      array.push(emotion.happiness);
-      array.push(
+      emoPosSum = emotion.happiness;
+      emoNegSum =
         emotion.sadness +
-          emotion.anger +
-          emotion.contempt +
-          emotion.disgust +
-          emotion.fear
-      );
-      array.push(emotion.neutral);
+        emotion.anger +
+        emotion.contempt +
+        emotion.disgust +
+        emotion.fear;
+      emoNeutSum = emotion.neutral;
 
-      if (array[0] > array[1] && array[0] > array[2]) {
-        responsePhrase =
-          "You're looking a little too happy there. Let me fix that!";
-        //  call insult API
-        this.getGiphy("sad");
-      } else if (array[1] > array[0] && array[1] > array[2]) {
-        //  call compliment API;
-        this.getGiphy("funny cats");
-        responsePhrase = "You look like you could use some cheering up.";
+      if (emoPosSum > emoNegSum && emoPosSum > emoNeutSum) {
+        emoState = "positive";
+      } else if (emoNegSum > emoPosSum && emoNegSum > emoNeutSum) {
+        emoState = "negative";
+      } else if (emoNeutSum > emoPosSum && emoNeutSum > emoNegSum) {
+        emoState = "neutral";
       } else {
-        responsePhrase = "Emotion neutralized.";
-        this.getGiphy("neutral");
-        // manipulate response container
+        emoState = "nonhuman";
+      }
+      return emoState;
+    },
+    getResponcePhrase(emoState) {
+      let responsePhrase;
+      switch (emoState) {
+        case "positive": //  call insult API
+          responsePhrase =
+            "You're looking a little too happy there. Let me fix that!";
+          this.getGiphy("sad");
+          break;
+        case "negative": //  call compliment API;
+          this.getGiphy("funny cats");
+          responsePhrase = "You look like you could use some cheering up.";
+          break;
+        case "neutral":
+          responsePhrase = "Emotion neutralized.";
+          this.getGiphy("neutral");
+          break;
+        case "nonhuman":
+          this.getGiphy("robot");
+          responsePhrase = "Are you sure you're human?";
+          break;
       }
       return responsePhrase;
     }
