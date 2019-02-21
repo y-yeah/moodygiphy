@@ -5,11 +5,14 @@
     background: linear-gradient(to top, #b7282e, #1f3134, #1f3134);
   "
   >
-    <v-toolbar app style="
+    <v-toolbar
+      app
+      style="
       background-color: #1f3134;
       color: #fff;
       height: 70px;
-    ">
+    "
+    >
       <v-toolbar-title class="headline text-uppercase">
         <img src="../img/omikuji_header.png" height="50px">
       </v-toolbar-title>
@@ -19,7 +22,8 @@
       <div>
         <h2 class="introTitle">INTRO</h2>
         <p class="intro">
-          <strong>Omykuji&copy;</strong> judges user’s emotional state from a picture, stabilizing their mood by providing text and gifs. <br>Please upload a picture of you with your face.
+          <strong>Omykuji&copy;</strong> judges user’s emotional state from a picture, stabilizing their mood by providing text and gifs.
+          <br>Please upload a picture of you with your face.
         </p>
         <Upload :photo="photo" :render="render" :emotion="emotion" :luck="luck"/>
       </div>
@@ -33,10 +37,10 @@
           <v-flex class="omikujiContainer" xs1>
             <div class="title">{{luck[index]}}</div>
           </v-flex>
-          <v-flex class="pictureContainer" xs4>
+          <v-flex class="pictureContainer" xs10>
             <v-img :src="photo.photo"/>
           </v-flex>
-          <v-flex class="emotionContainer" xs4>
+          <v-flex class="emotionContainer" xs7>
             <div>{{photo.emotion}}</div>
             <Chart
               v-if="emotion.length > index"
@@ -47,10 +51,10 @@
             />
             <!-- </div> -->
           </v-flex>
-          <v-flex class="responseContainer" xs4>
+          <v-flex class="responseContainer" xs8>
             <div>{{photo.response}}</div>
           </v-flex>
-          <v-flex class="giphyContainer" xs4>
+          <v-flex class="giphyContainer" xs8>
             <v-img :src="photo.giphy"/>
           </v-flex>
         </v-layout>
@@ -84,7 +88,8 @@ export default {
   /* padding-bottom: 20px; */
 }
 .omikujiContainer {
-  padding: 50px;
+  padding-left: 60px;
+  padding-right: 20px;
   font-size: 40px;
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -100,7 +105,7 @@ export default {
 .emotionContainer {
   border-left: dashed 1px black;
   border-right: dashed 1px black;
-  padding-right: 5px;
+  padding-right: 13px;
 }
 .responseContainer,
 .emotionContainer {
