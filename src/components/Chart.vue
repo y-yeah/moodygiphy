@@ -16,32 +16,32 @@ export default {
           datasets: [
             {
               backgroundColor: [
-                "white",
-                "black",
-                "black",
-                "black",
-                "black",
-                "black",
-                "grey"
+                "rgb(135,0,70)",
+                "rgb(155,0,60)",
+                "rgb(175,0,50)",
+                "rgb(195,0,40)",
+                "rgb(215,0,30)",
+                "rgb(235,0,20)",
+                "rgb(255,0,10)",
               ],
               borderColor: [
-                "white",
-                "black",
-                "black",
-                "black",
-                "black",
-                "black",
-                "grey"
+                "rgb(135,0,70)",
+                "rgb(155,0,60)",
+                "rgb(175,0,50)",
+                "rgb(195,0,40)",
+                "rgb(215,0,30)",
+                "rgb(235,0,20)",
+                "rgb(255,0,10)",
               ],
               borderWidth: 3,
               data: [
                 this.emotion[this.index].happiness,
+                this.emotion[this.index].neutral,
                 this.emotion[this.index].sadness,
+                this.emotion[this.index].fear,
                 this.emotion[this.index].anger,
                 this.emotion[this.index].contempt,
                 this.emotion[this.index].disgust,
-                this.emotion[this.index].fear,
-                this.emotion[this.index].neutral
               ]
             }
           ]
