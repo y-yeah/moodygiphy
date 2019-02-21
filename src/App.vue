@@ -19,7 +19,7 @@
       <div>
         <h2 class="introTitle">INTRO</h2>
         <p class="intro">
-          <strong>Omykuji&copy;</strong> judges user’s emotional state from a picture, stabilizing their mood by providing text and gifs. Please upload a picture of you with your face.
+          <strong>Omykuji&copy;</strong> judges user’s emotional state from a picture, stabilizing their mood by providing text and gifs. <br>Please upload a picture of you with your face.
         </p>
         <Upload :photo="photo" :render="render" :emotion="emotion" :luck="luck"/>
       </div>
