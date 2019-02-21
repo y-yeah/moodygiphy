@@ -39,17 +39,17 @@ export default {
           })
             .then(res => {
               console.log("=======>", res.data);
-              this.getEmotion(res.data);
-              this.photo[photo.length - 1].emotion = this.getEmotion(res.data);
+              //this.getEmotion(res.data);
+              this.photo[photo.length - 1].emotion = this.getResponcePhrase(
+                this.getEmotion(res.data)
+              );
               photo[photo.length - 1].response =
                 "No one can see your inner feelings.";
-              return photo[photo.length - 1].emotion;
+              return this.getEmotion(res.data);
             })
             .then(emotion => {
-              if (
-                emotion ===
-                "You're looking a little too happy there. Let me fix that!"
-              ) {
+              console.log(emotion);
+              if (emotion === "positive") {
                 axios
                   .get("/api/insult", {
                     crossorigin: true,
@@ -59,6 +59,22 @@ export default {
                   })
                   .then(res => {
                     console.log(res);
+                    photo[photo.length - 1].response = res.data;
+                    render.push(photo.length);
+                  })
+                  .catch(err => {
+                    console.error(err);
+                  });
+              } else if (emotion === "negative") {
+                axios
+                  .get("/api/slapbot", {
+                    crossorigin: true,
+                    headers: {
+                      "Access-Control-Allow-Origin": "*"
+                    }
+                  })
+                  .then(res => {
+                    console.log("negative emotion: ", res);
                     photo[photo.length - 1].response = res.data;
                     render.push(photo.length);
                   })
@@ -116,7 +132,10 @@ export default {
       } else {
         emoState = "nonhuman";
       }
-
+      return emoState;
+    },
+    getResponcePhrase(emoState) {
+      let responsePhrase;
       switch (emoState) {
         case "positive": //  call insult API
           responsePhrase =
