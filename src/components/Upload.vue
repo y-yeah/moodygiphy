@@ -16,15 +16,15 @@ export default {
       const reader = new FileReader();
       const photo = this.photo;
       let render = this.render;
-      new Promise(function(resolve) {
+
+      new Promise((resolve) => {
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = e => {
           photo.push({ photo: e.target.result });
           console.log(photo);
           resolve(photo);
         };
-      }).then(function(photo) {
-        console.log("PHOTO", photo);
+      }).then((photo) => {
         axios({
           method: "post",
           url: "/api/upload",
@@ -36,19 +36,45 @@ export default {
             photo: photo[photo.length - 1].photo
           }
         })
-          .then(res => {
-            console.log("WHAT IS IN THERE?", photo);
-            photo[photo.length - 1].emotion = res.data;
-            photo[photo.length - 1].giphy = "GIPHY";
-            render.push(photo.length);
-          })
-          .catch(err => {
-            console.warn(err);
-          });
+        .then(res => {
+          this.getEmotion(res.data);
+          this.photo[photo.length - 1].emotion = 
+          this.getEmotion(res.data);
+          photo[photo.length - 1].response = "Response goes here";
+          photo[photo.length - 1].giphy = "GIPHY";
+          render.push(photo.length);
+        })
+        .catch(err => {
+          console.warn(err);
+        });
       });
     },
     upload: function() {
       this.$refs.input.click();
+    },
+    getEmotion: (emotion) => {
+      let responsePhrase = ""
+      let array = [];
+
+      if (typeof emotion === "string"){
+        console.log("edge case")
+      }
+
+      array.push(emotion.happiness);
+      array.push(emotion.sadness + emotion.anger + emotion.contempt + emotion.disgust + emotion.fear);
+      array.push(emotion.neutral);
+
+      if (array[0] > array[1] && array[0] > array[2]) {
+          responsePhrase="You're looking a little too happy there. Let me fix that!"
+          //  call insult API
+        } else if (array[1] > array[0] && array[1] > array[2]) {
+          //  call compliment API;
+          responsePhrase="You look like you could use some cheering up."
+        } else {
+          responsePhrase="Emotion neutralized."
+         // manipulate response container 
+      }
+      return responsePhrase;
     }
   }
 };
