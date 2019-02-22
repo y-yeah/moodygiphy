@@ -4,15 +4,24 @@ export default {
   extends: Pie,
   props: ["emotion", "index"],
   mounted() {
-    this.renderRaderChart();
+    this.renderPieChart();
   },
   methods: {
-    renderRaderChart: function() {
+    renderPieChart: function() {
       console.log("index", this.index);
       console.log("emotion", this.emotion);
       this.renderChart(
         {
           type: "Pie",
+          labels: [
+            "Happy",
+            "Neutral",
+            "Sad",
+            "Fearful",
+            "Angry",
+            "Contemptuous",
+            "Disgusted"
+          ],
           datasets: [
             {
               backgroundColor: [
@@ -22,7 +31,7 @@ export default {
                 "rgb(195,0,40)",
                 "rgb(215,0,30)",
                 "rgb(235,0,20)",
-                "rgb(255,0,10)",
+                "rgb(255,0,10)"
               ],
               borderColor: [
                 "rgb(135,0,70)",
@@ -31,7 +40,7 @@ export default {
                 "rgb(195,0,40)",
                 "rgb(215,0,30)",
                 "rgb(235,0,20)",
-                "rgb(255,0,10)",
+                "rgb(255,0,10)"
               ],
               borderWidth: 3,
               data: [
@@ -41,7 +50,7 @@ export default {
                 this.emotion[this.index].fear,
                 this.emotion[this.index].anger,
                 this.emotion[this.index].contempt,
-                this.emotion[this.index].disgust,
+                this.emotion[this.index].disgust
               ]
             }
           ]
@@ -50,7 +59,12 @@ export default {
           responsive: true,
           maintainAspectRatio: false,
           "animation.animateScale": true,
-          tooltips: false
+          legend: {
+            display: false,
+            onHover: function() {
+              return this.legend;
+            }
+          }
         }
       );
     }

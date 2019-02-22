@@ -187,8 +187,8 @@ export default {
       return responsePhrase;
     },
     randomJudge: () => {
-      const options = ["大吉", "中吉", "小吉", "凶", "大凶"];
-      return options[Math.floor(Math.random() * 5)];
+      const options = ["大吉", "中吉", "小吉", "吉", "末吉", "凶", "大凶"];
+      return options[Math.floor(Math.random() * 7)];
     }
   }
 };
