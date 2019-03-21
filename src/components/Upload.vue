@@ -111,6 +111,7 @@ export default {
         "Pussy",
         "Whore",
         "Tit",
+        "Scrotum",
         "Twat"
       ];
       let variable = phrase;
