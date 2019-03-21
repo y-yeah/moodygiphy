@@ -21,7 +21,6 @@ export default {
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = e => {
           photo.push({ photo: e.target.result });
-          console.log(photo);
           resolve(photo);
         };
       })
@@ -52,14 +51,14 @@ export default {
               console.log(emotion);
               if (emotion === "positive") {
                 axios
-                  .get("/api/insult", {
+                  .get("/api/slapbot/Slap", {
                     crossorigin: true,
                     headers: {
                       "Access-Control-Allow-Origin": "*"
                     }
                   })
                   .then(res => {
-                    this.insultFilter(res.data);
+                    photo[photo.length - 1].response = res.data;
                     render.push(photo.length);
                   })
                   .catch(err => {
@@ -74,7 +73,6 @@ export default {
                     }
                   })
                   .then(res => {
-                    console.log("negative emotion: ", res);
                     photo[photo.length - 1].response = res.data;
                     render.push(photo.length);
                   })
@@ -90,35 +88,6 @@ export default {
     },
     upload() {
       this.$refs.input.click();
-    },
-    insultFilter(phrase) {
-      const curse = [
-        "Bitch",
-        "Shit",
-        "Penis",
-        "Cum",
-        "Arse",
-        "Ass",
-        "Piss",
-        "Fuck",
-        "Sperm",
-        "Semen",
-        "Anus",
-        "Cunt",
-        "Anal",
-        "Nigger",
-        "Cock",
-        "Pussy",
-        "Whore",
-        "Tit",
-        "Twat"
-      ];
-      let variable = phrase;
-
-      for (let i = 0; i < curse.length; i++) {
-        variable = variable.replace(curse[i], "$*%@!");
-      }
-      this.photo[this.photo.length - 1].response = variable;
     },
     getGiphy(keyword) {
       axios({
@@ -166,12 +135,12 @@ export default {
     getResponcePhrase(emoState) {
       let responsePhrase;
       switch (emoState) {
-        case "positive": //  call insult API
+        case "positive":
           responsePhrase =
             "You're looking a little too happy there. Let me fix that!";
           this.getGiphy("sad");
           break;
-        case "negative": //  call compliment API;
+        case "negative":
           this.getGiphy("funny cats");
           responsePhrase = "You look like you could use some cheering up.";
           break;
@@ -200,7 +169,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* color: #2c3e50; */
   margin-top: 60px;
 }
 .input {

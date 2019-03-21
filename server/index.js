@@ -45,15 +45,9 @@ app.post("/api/upload", express.json(), async (req, res) => {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/octet-stream",
-
-      // "Content-Type": "application/json",
       "Ocp-Apim-Subscription-Key": FACE_KEY
     },
     data: binaryImage
-    // data: {
-    //   url:
-    //     "https://upload.wikimedia.org/wikipedia/commons/6/6d/Shinz%C5%8D_Abe_Official.jpg"
-    // }
   })
     .then(response => {
       response.data.length !== 0
@@ -65,18 +59,15 @@ app.post("/api/upload", express.json(), async (req, res) => {
     });
 });
 
-app.get("/api/insult", (req, res) => {
+app.get("/api/slapbot/Slap", (req, res) => {
   axios
-    .get("https://lakerolmaker-insult-generator-v1.p.rapidapi.com/", {
+    .get("https://markmscott-slapbot-v1.p.rapidapi.com/Slap", {
       headers: {
         "X-RapidAPI-Key": RAKUTEN_KEY
-      },
-      params: {
-        mode: "random"
       }
     })
     .then(response => {
-      res.json(response.data);
+      res.json(response.data[0].description);
       return;
     })
     .catch(err => {
@@ -107,15 +98,10 @@ app.get("/api/giphy", (req, res) => {
 });
 
 app.get("/api/slapbot", (req, res) => {
-  const { q } = req.query;
   axios
     .get("https://markmscott-slapbot-v1.p.rapidapi.com/love", {
       headers: {
         "X-RapidAPI-Key": RAKUTEN_KEY
-      },
-      params: {
-        //q: q,
-        //allowedSeverity: "pg"
       }
     })
     .then(response => {
