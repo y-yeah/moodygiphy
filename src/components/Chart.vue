@@ -8,8 +8,6 @@ export default {
   },
   methods: {
     renderPieChart: function() {
-      console.log("index", this.index);
-      console.log("emotion", this.emotion);
       this.renderChart(
         {
           type: "Pie",
