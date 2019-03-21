@@ -37,7 +37,6 @@ export default {
             }
           })
             .then(res => {
-              console.log("EMOTION", res.data);
               this.emotion.push(res.data);
               this.luck.push(this.randomJudge());
               this.photo[photo.length - 1].emotion = this.getResponcePhrase(
@@ -48,7 +47,6 @@ export default {
               return this.getEmotion(res.data);
             })
             .then(emotion => {
-              console.log(emotion);
               if (emotion === "positive") {
                 axios
                   .get("/api/slapbot/Slap", {
