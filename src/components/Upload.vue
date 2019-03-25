@@ -57,7 +57,7 @@ export default {
                   })
                   .then(res => {
                     photo[photo.length - 1].response = res.data;
-                    render.push(photo.length);
+                    // render.push(photo.length);
                   })
                   .catch(err => {
                     console.error(err);
@@ -72,7 +72,7 @@ export default {
                   })
                   .then(res => {
                     photo[photo.length - 1].response = res.data;
-                    render.push(photo.length);
+                    // render.push(photo.length);
                   })
                   .catch(err => {
                     console.error(err);
