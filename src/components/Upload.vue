@@ -1,7 +1,12 @@
 <template>
   <div id="upload">
     <input type="file" ref="input" @change="(e) => change(e)" class="input">
-    <v-btn flat @click="upload" style="color: #FFF; font-weight: bold; font-size: large;">Upload</v-btn>
+    <v-btn
+      large
+      flat
+      @click="upload"
+      style="color: #FFF; font-weight: bold; font-size: large;"
+    >Upload</v-btn>
   </div>
 </template>
 
