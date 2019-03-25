@@ -5,7 +5,7 @@
       large
       flat
       @click="upload"
-      style="color: #FFF; font-weight: bold; font-size: large;"
+      style="color: #FFF; font-weight: bold; font-size: large; background-color: #b7282e"
     >Upload</v-btn>
   </div>
 </template>
