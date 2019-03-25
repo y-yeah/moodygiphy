@@ -101,4 +101,4 @@ If you want to push your edited files to your remote file, run the following:
 <div align="center">
 <b>Linkedin</b>: <br/>
 
-[Ian McClerin](https://www.linkedin.com/in/ian-mcclerin-a0827737/)&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;[Keisuke Mori](https://www.linkedin.com/in/keisuke-mori-b64683176/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Chaz Wilson](https://www.linkedin.com/in/chaz-wilson/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Yuma Sumi](#)
+[Ian McClerin](https://www.linkedin.com/in/ian-mcclerin-a0827737/)&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;[Keisuke Mori](https://www.linkedin.com/in/keisuke-mori-b64683176/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Chaz Wilson](https://www.linkedin.com/in/chaz-wilson/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Yuma Sumi](https://www.linkedin.com/in/yuma-sumi-15b8129a/)
