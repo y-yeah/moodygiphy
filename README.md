@@ -62,25 +62,34 @@ Potential future plans are:
 
 As of 25 March 2019, this application is available at [Heroku](https://omykuji.herokuapp.com).
 
-## Use this app locally
+## Setup Instructions
 
-`yarn` to install dependencies
 
-`yarn serve` to run development server (use for working on frontend)
+This build relies on API keys that are not included. You will need one key from RakutenRapid API to operate Giphy and Slapbot. You will need to obtain another from Microsoft Azure's Cognitive Services to access the facial detection API.
 
-`yarn prod` to create production build and run production server (use for working on backend)
+Create a .env file and paste the following in:
 
-`yarn build` to create production build of static files
+`RAKUTEN_KEY=`[your api key]
+`FACE_KEY=`[your api key]
 
-### 1. Ahahaha
+Be sure to include your .env in your .gitignore if you plan to push to a local branch.
 
-AHAHA.
+## Create Build
 
-```
-SOMETHING
-```
+`yarn install` –– this installs all the dependencies.
+`yarn local-test` –– this allows you to build on your local computer
 
-## 4. Contributions
+Visit localhost:8080 and try it out!
+
+## Additional Commands
+
+`yarn serve` -- this runs development server (use for working on frontend)
+
+`yarn prod` -- this creates production build and run production server (use for working on backend)
+
+`yarn build` -- this creates production build of static files
+
+# 4. Contributions
 
 To contribute to this app, make sure you create a branch and **ALWAYS** make a pull request. **DO NOT EDIT THE MASTER!**
 
