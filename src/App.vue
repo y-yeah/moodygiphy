@@ -34,13 +34,13 @@
           class="omikuji"
           align-center
         >
-          <v-flex class="omikujiContainer" xs1>
+          <v-flex v-if="photo.giphy" class="omikujiContainer" xs1>
             <div class="title">{{luck[index]}}</div>
           </v-flex>
-          <v-flex class="pictureContainer" xs10>
+          <v-flex v-if="photo.giphy" class="pictureContainer" xs10>
             <v-img :src="photo.photo"/>
           </v-flex>
-          <v-flex class="emotionContainer" xs7>
+          <v-flex v-if="photo.giphy" class="emotionContainer" xs7>
             <div>{{photo.emotion}}</div>
             <Chart
               v-if="emotion.length > index"
@@ -49,13 +49,15 @@
               class="chart"
               style="width: 200px; height: 200px; margin-left:auto; margin-right: auto;"
             />
-            <!-- </div> -->
           </v-flex>
-          <v-flex class="responseContainer" xs8>
+          <v-flex v-if="photo.giphy" class="responseContainer" xs8>
             <div>{{photo.response}}</div>
           </v-flex>
-          <v-flex class="giphyContainer" xs8>
+          <v-flex v-if="photo.giphy" class="giphyContainer" xs8>
             <v-img :src="photo.giphy"/>
+          </v-flex>
+          <v-flex v-else xs12 align-center class="loadingSpinner">
+            <atom-spinner :animation-duration="1000" :size="60" :color="'#fff'"/>
           </v-flex>
         </v-layout>
       </div>
@@ -66,12 +68,14 @@
 <script>
 import Upload from "./components/Upload";
 import Chart from "./components/Chart";
+import { AtomSpinner } from "epic-spinners";
 
 export default {
   name: "App",
   components: {
     Upload,
-    Chart
+    Chart,
+    AtomSpinner
   },
   data: () => ({
     photo: [],
@@ -134,5 +138,9 @@ export default {
   font-family: "YuMincho" !important;
   font-weight: bold;
   font-size: 50px !important;
+}
+.loadingSpinner > div {
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

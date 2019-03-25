@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "dotenv": "^6.2.0",
+    "epic-spinners": "^1.0.4",
     "express": "^4.16.4",
     "heroku": "^7.21.0",
     "morgan": "^1.9.1",
