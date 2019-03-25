@@ -38,21 +38,21 @@
 
 # 1. Overview
 
-Omykuji judges user's emotional state from a picture, and stabilize their mood by providing text and gifs.
+Omykuji judges a user's emotional state from an uploaded picture, and stabilizes their mood by providing text and gifs.
 
-Its design and name are inspired by <i>omikuji</i>, traditional Japanese fortune telling slip that predict positive and negative outcomes.
+Its design and name are inspired by <i>omikuji</i>, traditional Japanese fortune telling slips, that predict positive and negative outcomes.
 
 <img src="./img/omykuji_intro.png" alt="omykuji architecture">
 
 
 # 2. Architecture
 
-Omykuji is built with VueJS and Vuetify.js, and calls Rakuten Rapid APIs and Microsoft Face API.
+Omykuji is built using VueJS and Vuetify.js, and calls Rakuten Rapid APIs and Microsoft Azure Face API.
 
 <img src="./img/omykuji_system.png" alt="omykuji architecture">
 <img src="./img/omykuji_tech.png" alt="omykuji architecture">
 
-The main future plans are:
+Potential future plans are:
 
 - 
 
@@ -60,7 +60,7 @@ The main future plans are:
 
 ## Use this app on the server
 
-As of 25 March, this application is currently available at [Heroku](https://omykuji.herokuapp.com).
+As of 25 March 2019, this application is available at [Heroku](https://omykuji.herokuapp.com).
 
 ## Use this app locally
 
