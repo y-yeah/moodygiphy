@@ -89,7 +89,7 @@ Visit localhost:8080 and try it out!
 
 `yarn build` -- this creates production build of static files
 
-## 4. Contributions
+# 4. Contributions
 
 To contribute to this app, make sure you create a branch and **ALWAYS** make a pull request. **DO NOT EDIT THE MASTER!**
 
