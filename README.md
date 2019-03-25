@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./img/omykuji_app.png" align="center" width="100%" alt="omykuji">
+    <img src="./img/omykuji_app.jpg" align="center" width="100%" alt="omykuji">
 </div>
 <h1 align="center" >OMYKUJI</h1>
 <div align="center">
@@ -42,19 +42,20 @@ Omykuji judges a user's emotional state from an uploaded picture, and stabilizes
 
 Its design and name are inspired by <i>omikuji</i>, traditional Japanese fortune telling slips, that predict positive and negative outcomes.
 
-<img src="./img/omykuji_intro.png" alt="omykuji architecture">
+<img src="./img/omykuji_intro.jpg" alt="omykuji architecture">
 
 
 # 2. Architecture
 
 Omykuji is built using VueJS and Vuetify.js, and calls Rakuten Rapid APIs and Microsoft Azure Face API.
 
-<img src="./img/omykuji_system.png" alt="omykuji architecture">
-<img src="./img/omykuji_tech.png" alt="omykuji architecture">
+<img src="./img/omykuji_system.jpg" alt="omykuji architecture">
+<img src="./img/omykuji_tech.jpg" alt="omykuji architecture">
 
 Potential future plans are:
 
-- 
+- Better mobile experience
+- Better social media sharing
 
 # 3. Setup
 
@@ -106,8 +107,8 @@ If you want to push your edited files to your remote file, run the following:
 <b>LICENSE</b>: CC7 TEAM OMYKUJI
 </div>
 <br/>
-<img src="./img/omykuji_team.png" alt="omykuji team">
+<img src="./img/omykuji_team.jpg" alt="omykuji team">
 <div align="center">
 <b>Linkedin</b>: <br/>
 
-[Ian McClerin](https://www.linkedin.com/in/ian-mcclerin-a0827737/)&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;[Keisuke Mori](https://www.linkedin.com/in/keisuke-mori-b64683176/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Chaz Wilson](https://www.linkedin.com/in/chaz-wilson/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Yuma Sumi](#)
+[Ian McClerin](https://www.linkedin.com/in/ian-mcclerin-a0827737/)&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;[Keisuke Mori](https://www.linkedin.com/in/keisuke-mori-b64683176/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Chaz Wilson](https://www.linkedin.com/in/chaz-wilson/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Yuma Sumi](https://www.linkedin.com/in/yuma-sumi-15b8129a/)
